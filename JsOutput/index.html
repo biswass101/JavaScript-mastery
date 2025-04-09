@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js Output methods</title>
+</head>
+<body>
+    <h1>First day working for the company</h1>
+    <p>Doing Good</p>
+
+    <p id="demo"></p>
+    <p id="demo1"></p>
+    <button id="demo2" onclick="notify()">Notify</button>
+    <button id="demo3" onclick="printWindow()">Print</button>
+    <script>
+        // method-1: document.innerHTML
+        const pId = document.getElementById("demo");
+        pId.innerHTML = "<h2>Wow! innerHTML working!!</h2>"
+
+        //method-2: document.innerText
+        const pId1 = document.getElementById('demo1');
+        pId1.innerText = "Wow! innerText also working fine!";
+
+        //method-3: document.write()
+        document.write("i didn't know this way!"); //it will add the content very end of the document
+        
+        //method-4: window.alert()
+        function notify() {
+            window.alert("Ting Ting Notification!");
+        }
+
+        //method-5: console.log() //the GOAT of debugging
+        console.log("console.log()");
+
+        //method-6: window.print()
+        function printWindow() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
