@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation by DOM</title>
+    <script src="./index.js" defer></script>
+</head>
+<body>
+    <form id="dataForm" name="myForm" onsubmit="return validateForm()">
+        <label>Name: </label>
+        <input type="text" name="fName"/>
+        <input type="submit" value="submit"/>
+    </form>
+
+    <!-- Input Number Validation -->
+     <h1>Number Validation</h1>
+     <p>Choose number from 1 to 10</p>
+     <input id="ipt" type="text"/>
+     <button id="btn">Submit</button>
+     <p id="validation"></p>
+</body>
+</html>

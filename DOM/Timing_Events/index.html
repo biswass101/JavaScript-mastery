@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timing Events!!!</title>
+    <script src="./script.js"></script>
+</head>
+<body>
+    <h1 id="txt">This text will be changed after 3 second</h1>
+    <button id="btn">Change</button>
+
+    <h2>Live Clock:</h2>
+    <p id="demo"></p>
+
+    <script>
+        const btn = document.querySelector('#btn');
+        btn.addEventListener('click', () => {
+            setTimeout(() => {
+                const txt = document.querySelector('#txt');
+                txt.innerText = 'Text Changed!!!';
+            }, 3000);
+        })
+
+        setInterval(() => {
+            let date = new Date();
+            document.querySelector('#demo').innerText = date.toLocaleTimeString();
+        }, 1000);
+    </script>
+</body>
+</html>
