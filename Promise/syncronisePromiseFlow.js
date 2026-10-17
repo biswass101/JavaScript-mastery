@@ -11,59 +11,104 @@ let clg = console.log;
 
 // promise.then(value => clg(value));
 
-function checkInventory(callback) {
-  setTimeout(() => {
-    clg("Checking Inventory...");
-    callback();
-  }, 2000);
-}
-
-function createOrder(callback) {
-  setTimeout(() => {
-    clg("Creating Order...");
-
-    const error = new Error("Order creation failed");
-    callback(error);
-  }, 1000);
-}
-
-function chargePayment(callback) {
-  setTimeout(() => {
-    clg("Charging Payment...");
-    const error = null;
-    const chargedAmount = 100;
-    callback(error, chargedAmount);
-  }, 2000);
-}
-
-function sendInvoice(callback) {
-  setTimeout(() => {
-    clg("Sending Invoice...");
-    callback();
-  }, 1000);
-}
-
-function main() {
-
-  // callback hell
-  checkInventory(() => {
-    createOrder((err) => {
-      if(err) {
-        clg(err);
-      }
-      chargePayment((err, chargedAmount) => {
-        if(err) {
-          clg("Error occured!");
-          return;
-        }
-
-        clg("Charged Amount: ", chargedAmount);
-        sendInvoice(() => {
-          clg("All Done!");
-        });
-      });
-    });
+function checkInventory() {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      clg("Checking Inventory...");
+      // let inStock = 4;
+      // resolve(inStock);
+      reject(new Error("Failed to check inventory!"));
+    }, 2000);
   });
+
+  return promise;
+}
+
+function createOrder() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      clg("Creating Order...");
+      resolve();
+    }, 1000);
+  });
+}
+
+function chargePayment() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      clg("Charging Payment");
+      resolve();
+    }, 2000);
+  });
+}
+
+function sendInvoice() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      clg("Sending Invoice...");
+      resolve();
+    }, 1000);
+  });
+}
+
+async function main() {
+  // callback hell
+  // checkInventory(() => {
+  //   createOrder((err) => {
+  //     if(err) {
+  //       clg(err);
+  //     }
+  //     chargePayment((err, chargedAmount) => {
+  //       if(err) {
+  //         clg("Error occured!");
+  //         return;
+  //       }
+
+  //       clg("Charged Amount: ", chargedAmount);
+  //       sendInvoice(() => {
+  //         clg("All Done!");
+  //       });
+  //     });
+  //   });
+  // });
+
+  // no callback hell
+  // checkInventory()
+  //   .then(createOrder)
+  //   .catch((err) => {
+  //     clg("err", err);
+  //   }) // handling error
+  //   .then(chargePayment)
+  //   .then(sendInvoice);
+
+  setTimeout(() => {
+    clg("Other request processing...");
+  }, 3000);
+
+  try {
+    await checkInventory();
+  } catch (err) {
+    clg("err", err);
+  }
+
+  try {
+    await createOrder();
+  } catch (err) {
+    clg("err", err);
+  }
+
+  try {
+    await chargePayment();
+  } catch (err) {
+    clg("err", err);
+  }
+
+  try {
+    await sendInvoice();
+  } catch (err) {
+    clg("err", err);
+  }
+
   clg("Processing Other tasks");
 }
 
